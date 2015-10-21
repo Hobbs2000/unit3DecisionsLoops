@@ -14,11 +14,13 @@ public class RockPaperScissors
         {
             System.out.println("Its a tie!");
         }
-        else if (player1.equals("rock") && player2.equals("scissors") || player1.equals("scissors") && player2.equals("paper") || player1.equals("paper") && player2.equals("rock")))
+        else if (player1.equals("rock") == true && player2.equals("scissors") == true
+                || player1.equals("scissors") == true && player2.equals("paper") == true
+                || player1.equals("paper") == true && player2.equals("rock") == true)      
         {
             System.out.println("Player 1 wins!");
         }
-        else if (player2.equals("rock") && player1.equals("scissors"))
+        else
         {
             System.out.println("Player 2 wins!");
         }
