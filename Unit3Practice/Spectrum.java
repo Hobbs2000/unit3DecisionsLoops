@@ -8,7 +8,7 @@ public class Spectrum
     {
         Scanner in =  new Scanner(System.in);
         
-        System.out.print("What is the wave length of the wave?: ");
+        System.out.print("What is the wave length of the wave?(Write in scientific notation): ");
         double waveLength = in.nextDouble();
         
         String type;
