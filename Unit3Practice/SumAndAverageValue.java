@@ -4,7 +4,7 @@ import java.util.Scanner;
  */
 class SumAndAverageValue
 {
-    public static void main(String[] args)
+    public static double averageInputs()
     {
         Scanner in = new Scanner(System.in);
         
@@ -13,6 +13,7 @@ class SumAndAverageValue
         
         System.out.println("Enter a series of doubles or any character to quit: ");
         
+        //Does not know how many times to execute, so use a while loop
         while (in.hasNextDouble())
         {
             double num = in.nextDouble();
@@ -23,7 +24,8 @@ class SumAndAverageValue
         if (count > 0)
         {
             average = total/count;
-            System.out.println("Average: "+average);
         }
+        
+        return average;
     }
 }
