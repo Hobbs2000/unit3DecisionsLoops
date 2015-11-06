@@ -30,6 +30,10 @@ The universe of the Game of Life is an infinite two-dimensional orthogonal
 	moment at which this happens is sometimes called a tick (in other words,
 	each generation is a pure function of the preceding one). The rules
 	continue to be applied repeatedly to create further generations.
+	
+* The grid will be 800x600 pixels large
+* Live cells will be green while dead cells will be black
+* There will be a default pattern of just a straight line of cells from one end to the other
 
 
 Nonfunctional Requirements:
