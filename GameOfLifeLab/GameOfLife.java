@@ -38,10 +38,6 @@ public class GameOfLife
         // populate the game
         populateGame();
         
-<<<<<<< HEAD
-=======
-        
->>>>>>> origin/master
         createNextGeneration();
         
         // display the newly constructed and populated world
@@ -64,11 +60,7 @@ public class GameOfLife
         final int X3 = 5, Y3 = 4;
         final int X4 = 6, Y4 = 4;
         final int X5 = 7, Y5 = 4;
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> origin/master
         // the grid of Actors that maintains the state of the game
         //  (alive cells contains actors; dead cells do not)
         Grid<Actor> grid = world.getGrid();
@@ -93,10 +85,6 @@ public class GameOfLife
         Rock rock5 = new Rock();
         Location loc5 = new Location(Y5, X5);
         grid.put(loc5, rock5);
-<<<<<<< HEAD
-        
-=======
->>>>>>> origin/master
     }
 
     /**
@@ -115,11 +103,9 @@ public class GameOfLife
         
         // create the grid, of the specified size, that contains Actors
         Grid<Actor> grid = world.getGrid();
-<<<<<<< HEAD
         
         // insert magic here...
         
-=======
         /*Make an array for all the cells that will be killed at the end of the generation
           Need to do this to prevent to many cells being killed off
           What would have happened is that a cell would have been killed, then that would have 
@@ -127,31 +113,11 @@ public class GameOfLife
         int arraySize = ROWS * COLS;
         int place = 0;
         Location[] deadCells = new Location[arraySize]; 
->>>>>>> origin/master
+
         for (int row = 0; row < ROWS; row++)
         {
             for (int col = 0; col < COLS; col++)
             {
-<<<<<<< HEAD
-                if (getActor(row, col) != null)
-                {
-                    Location loc = new Location(row, col);
-                    grid.getNeighbors(loc);
-                    System.out.println("\n");
-                    System.out.println("Coords: "+row+" "+col);
-                    System.out.println(grid.get(loc));
-                    System.out.println(grid.getNeighbors(loc));
-                    System.out.println(grid.getNeighbors(loc).size());
-                    
-                    if ((grid.getNeighbors(loc)).size() < 1)
-                    {
-                        grid.remove(loc);
-                    }
-                }
-            }
-        }
-=======
-                //Checks if that coordinate is occupied by a cell
                 if (getActor(row, col) != null)
                 {
                     Location loc = new Location(row, col);
@@ -170,6 +136,8 @@ public class GameOfLife
                 }
             }
         }
+        //Checks if that coordinate is occupied by a cell
+ 
         //Removes all cells marked for death in that generation
         for (int i = 0; i < deadCells.length; i++)
         {
@@ -182,8 +150,8 @@ public class GameOfLife
                 break;
             }
         }
->>>>>>> origin/master
     }
+
     /**
      * Returns the actor at the specified row and column. Intended to be used for unit testing.
      *
