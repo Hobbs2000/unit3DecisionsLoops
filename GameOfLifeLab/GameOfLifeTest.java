@@ -109,9 +109,7 @@ public class GameOfLifeTest
          */
         
         GameOfLife game = new GameOfLife();
-        game.createNextGeneration();
-        game.createNextGeneration();
-        
+               
         final int ROWS = game.getNumRows();
         final int COLS = game.getNumCols();
 
@@ -128,7 +126,9 @@ public class GameOfLifeTest
                         (row == 3 && col == 6) ||
                         (row == 4 && col == 3) ||
                         (row == 4 && col == 7) ||
-                        (row))
+                        (row == 5 && col == 4) ||
+                        (row == 5 && col == 6) ||
+                        (row == 6 && col == 5))
                 {
                     assertNotNull("expected alive cell at (" + row + ", " + col + ")", cell);
                 }

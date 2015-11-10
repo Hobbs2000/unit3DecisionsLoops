@@ -18,8 +18,8 @@ public class GameOfLife
     private ActorWorld world;
     
     // the game board will have 5 rows and 5 columns
-    private final int ROWS = 5;
-    private final int COLS = 5;
+    private final int ROWS = 10;
+    private final int COLS = 10;
     
     /**
      * Default constructor for objects of class GameOfLife
@@ -38,6 +38,9 @@ public class GameOfLife
         // populate the game
         populateGame();
         
+        
+        createNextGeneration();
+        
         // display the newly constructed and populated world
         world.show();
         
@@ -53,9 +56,11 @@ public class GameOfLife
     private void populateGame()
     {
         // constants for the location of the three cells initially alive
-        final int X1 = 2, Y1 = 0;
-        final int X2 = 0, Y2 = 2;
-        final int X3 = 1, Y3 = 2;
+        final int X1 = 3, Y1 = 4;
+        final int X2 = 4, Y2 = 4;
+        final int X3 = 5, Y3 = 4;
+        final int X4 = 6, Y4 = 4;
+        final int X5 = 7, Y5 = 4;
 
         // the grid of Actors that maintains the state of the game
         //  (alive cells contains actors; dead cells do not)
@@ -73,6 +78,14 @@ public class GameOfLife
         Rock rock3 = new Rock();
         Location loc3 = new Location(Y3, X3);
         grid.put(loc3, rock3);
+        
+        Rock rock4 = new Rock();
+        Location loc4 = new Location(Y4, X4);
+        grid.put(loc4, rock4);
+        
+        Rock rock5 = new Rock();
+        Location loc5 = new Location(Y5, X5);
+        grid.put(loc5, rock5);
     }
 
     /**
@@ -91,11 +104,49 @@ public class GameOfLife
         
         // create the grid, of the specified size, that contains Actors
         Grid<Actor> grid = world.getGrid();
-        
-        // insert magic here...
-        
+        /*Make an array for all the cells that will be killed at the end of the generation
+          Need to do this to prevent to many cells being killed off
+          What would have happened is that a cell would have been killed, then that would have 
+          affected the next cell to be checked, and thats not supposed to happen*/
+        int arraySize = ROWS * COLS;
+        int place = 0;
+        Location[] deadCells = new Location[arraySize]; 
+        for (int row = 0; row < ROWS; row++)
+        {
+            for (int col = 0; col < COLS; col++)
+            {
+                //Checks if that coordinate is occupied by a cell
+                if (getActor(row, col) != null)
+                {
+                    Location loc = new Location(row, col);
+                    System.out.println("Found a cell at: Row "+row+" and Col "+col);  
+                    System.out.println(grid.getNeighbors(loc));
+                    System.out.println((grid.getNeighbors(loc)).size());
+                    
+                    //Checks to see if that cell qualifies to be marked for death
+                    if ((grid.getNeighbors(loc).size() < 2))
+                    {
+                        deadCells[place] = loc;
+                        place++;
+                        System.out.println("Cell died at: "+row+" "+col);
+                    }
+                    System.out.println("\n");
+                }
+            }
+        }
+        //Removes all cells marked for death in that generation
+        for (int i = 0; i < deadCells.length; i++)
+        {
+            if (deadCells[i] != null)
+            {
+                grid.remove(deadCells[i]);
+            }
+            else
+            {
+                break;
+            }
+        }
     }
-    
     /**
      * Returns the actor at the specified row and column. Intended to be used for unit testing.
      *
