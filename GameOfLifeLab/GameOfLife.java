@@ -39,6 +39,7 @@ public class GameOfLife
         populateGame();
         
         createNextGeneration();
+        createNextGeneration();
         
         // display the newly constructed and populated world
         world.show();
@@ -111,44 +112,49 @@ public class GameOfLife
           What would have happened is that a cell would have been killed, then that would have 
           affected the next cell to be checked, and thats not supposed to happen*/
         int arraySize = ROWS * COLS;
-        int place = 0;
-        Location[] deadCells = new Location[arraySize]; 
+        int D_place = 0;
+        int R_place = 0;
+        Location[] deadCells = new Location[arraySize];
+        Location[] revivedCells = new Location[arraySize];
 
         for (int row = 0; row < ROWS; row++)
         {
             for (int col = 0; col < COLS; col++)
             {
+                Location loc = new Location(row, col);
+                //Will run if the cell is alive
                 if (getActor(row, col) != null)
                 {
-                    Location loc = new Location(row, col);
-                    System.out.println("Found a cell at: Row "+row+" and Col "+col);  
-                    System.out.println(grid.getNeighbors(loc));
-                    System.out.println((grid.getNeighbors(loc)).size());
-                    
                     //Checks to see if that cell qualifies to be marked for death
-                    if ((grid.getNeighbors(loc).size() < 2))
+                    if ((grid.getNeighbors(loc).size() < 2) || ((grid.getNeighbors(loc)).size() > 3))
                     {
-                        deadCells[place] = loc;
-                        place++;
-                        System.out.println("Cell died at: "+row+" "+col);
+                        deadCells[D_place] = loc;
+                        D_place++;
                     }
-                    System.out.println("\n");
+                }
+                else
+                {
+                    //Checks to see if that dead cell is qualified to become marked for revival
+                    if ((grid.getNeighbors(loc).size()) == 3)
+                    {
+                        revivedCells[R_place] = loc;
+                        R_place++;
+                    }
                 }
             }
         }
-        //Checks if that coordinate is occupied by a cell
  
-        //Removes all cells marked for death in that generation
-        for (int i = 0; i < deadCells.length; i++)
+        //Officially Removes all cells marked for death in that generation
+        for (int i = 0; i < D_place; i++)
         {
-            if (deadCells[i] != null)
-            {
-                grid.remove(deadCells[i]);
-            }
-            else
-            {
-                break;
-            }
+            grid.remove(deadCells[i]);
+        }
+        
+        //Officially Adds all cells marked for revival in that generation
+        for (int i = 0; i < R_place; i++)
+        {
+            Rock rock = new Rock();
+            grid.put(revivedCells[i], rock);
         }
     }
 
