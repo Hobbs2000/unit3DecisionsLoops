@@ -38,11 +38,24 @@ public class GameOfLife
         // populate the game
         populateGame();
         
-        createNextGeneration();
-        createNextGeneration();
         
-        // display the newly constructed and populated world
-        world.show();
+        //Comment this out when testing the class
+        while (true)
+        {
+            try
+            {
+                Thread.sleep(100);
+            }
+            catch (InterruptedException ex)
+            {
+                Thread.currentThread().interrupt();
+            }
+            createNextGeneration();
+        
+            // display the newly constructed and populated world
+            world.show();
+        }
+        
         
     }
     
@@ -96,7 +109,7 @@ public class GameOfLife
      * @post    the world has been populated with a new grid containing the next generation
      * 
      */
-    private void createNextGeneration()
+    public void createNextGeneration()
     {
         /** You will need to read the documentation for the World, Grid, and Location classes
          *      in order to implement the Game of Life algorithm and leverage the GridWorld framework.
@@ -156,6 +169,7 @@ public class GameOfLife
             Rock rock = new Rock();
             grid.put(revivedCells[i], rock);
         }
+
     }
 
     /**
