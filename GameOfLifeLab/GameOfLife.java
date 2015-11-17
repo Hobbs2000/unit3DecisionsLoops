@@ -4,6 +4,7 @@ import info.gridworld.actor.Rock;
 import info.gridworld.grid.Grid;
 import info.gridworld.grid.BoundedGrid;
 import info.gridworld.grid.Location;
+import java.util.*;
 
 /**
  * Game of Life starter code. Demonstrates how to create and populate the game using the GridWorld framework.
@@ -17,10 +18,12 @@ public class GameOfLife
     // the world comprised of the grid that displays the graphics for the game
     private ActorWorld world;
     
-    // the game board will have 5 rows and 5 columns
+    // the game board will have 10 rows and 10 columns
     private final int ROWS = 10;
     private final int COLS = 10;
     
+    Scanner in = new Scanner(System.in);
+    Random numGen = new Random();
     /**
      * Default constructor for objects of class GameOfLife
      * 
@@ -35,27 +38,39 @@ public class GameOfLife
         // create a world based on the grid
         world = new ActorWorld(grid);
         
+        //Determine if the pattern will be random or not
+        //When testing, disable/comment out the user input and pre set willBeRandom to false
+        boolean willBeRandom;
+        System.out.print("Would you like a random pattern(1) or the default pattern(2)?: ");
+        if (in.nextInt() == 1)
+        {
+            willBeRandom = true;
+        }
+        else
+        {
+            willBeRandom = false;
+        }
+        
         // populate the game
-        populateGame();
+        populateGame(willBeRandom);
+        world.show();
         
-        
-        //Comment this out when testing the class
+        //Start Generation loop
+        //When testing, disable/comment out the entire loop and preset the amount of generations you want to run
         while (true)
         {
             try
             {
-                Thread.sleep(100);
+                Thread.sleep(250);
             }
             catch (InterruptedException ex)
             {
-                Thread.currentThread().interrupt();
+                ex.printStackTrace();
             }
             createNextGeneration();
-        
             // display the newly constructed and populated world
             world.show();
         }
-        
         
     }
     
@@ -66,39 +81,76 @@ public class GameOfLife
      * @post    all actors that comprise the initial state of the game have been added to the grid
      * 
      */
-    private void populateGame()
+    private void populateGame(boolean isRand)
     {
-        // constants for the location of the three cells initially alive
-        final int X1 = 3, Y1 = 4;
-        final int X2 = 4, Y2 = 4;
-        final int X3 = 5, Y3 = 4;
-        final int X4 = 6, Y4 = 4;
-        final int X5 = 7, Y5 = 4;
-
-        // the grid of Actors that maintains the state of the game
-        //  (alive cells contains actors; dead cells do not)
-        Grid<Actor> grid = world.getGrid();
+        if (!isRand)
+        {
+            //This creates the default cell pattern of 5 cells in a straight horazontal line
+            
+            // constants for the location of the three cells initially alive
+            final int X1 = 3, Y1 = 4;
+            final int X2 = 4, Y2 = 4;
+            final int X3 = 5, Y3 = 4;   
+            final int X4 = 6, Y4 = 4;   
+            final int X5 = 7, Y5 = 4;
+            
+            // the grid of Actors that maintains the state of the game
+            //  (alive cells contains actors; dead cells do not)
+            Grid<Actor> grid = world.getGrid();
+            
+            // create and add rocks (a type of Actor) to the three intial locations
+            Rock rock1 = new Rock();
+            Location loc1 = new Location(Y1, X1);
+            grid.put(loc1, rock1);
+            
+            Rock rock2 = new Rock();
+            Location loc2 = new Location(Y2, X2);
+            grid.put(loc2, rock2);
         
-        // create and add rocks (a type of Actor) to the three intial locations
-        Rock rock1 = new Rock();
-        Location loc1 = new Location(Y1, X1);
-        grid.put(loc1, rock1);
-        
-        Rock rock2 = new Rock();
-        Location loc2 = new Location(Y2, X2);
-        grid.put(loc2, rock2);
-        
-        Rock rock3 = new Rock();
-        Location loc3 = new Location(Y3, X3);
-        grid.put(loc3, rock3);
-        
-        Rock rock4 = new Rock();
-        Location loc4 = new Location(Y4, X4);
-        grid.put(loc4, rock4);
-        
-        Rock rock5 = new Rock();
-        Location loc5 = new Location(Y5, X5);
-        grid.put(loc5, rock5);
+            Rock rock3 = new Rock();
+            Location loc3 = new Location(Y3, X3);
+            grid.put(loc3, rock3);
+            
+            Rock rock4 = new Rock();
+            Location loc4 = new Location(Y4, X4);
+            grid.put(loc4, rock4);
+            
+            Rock rock5 = new Rock();
+            Location loc5 = new Location(Y5, X5);
+            grid.put(loc5, rock5);
+        }
+        else
+        {
+            //This creates a random pattern of cells
+            
+            Grid<Actor> grid = world.getGrid();
+            
+            int lastY = -1, lastX = -1;
+            int y, x;
+            Location loc;
+            
+            //This randomly makes how many cells are going to be made alive
+            int cells = numGen.nextInt(ROWS*COLS);
+            for (int i = 1; i <= cells; i++)
+            {
+                //Randomly makes the coordinates of the cell
+                y = numGen.nextInt(ROWS);
+                x = numGen.nextInt(COLS);
+                Rock rock = new Rock();
+                
+                //Will run the while loop until the coordinates are not the same as the last coordinates
+                //This will prevent SOME overlapping actors, but not all
+                while (y == lastY || x == lastX)
+                {
+                    y = numGen.nextInt(ROWS);
+                    x = numGen.nextInt(COLS);
+                }
+                lastY = y;
+                lastX = x;
+                loc = new Location(y, x);
+                grid.put(loc, rock);
+            }
+        }
     }
 
     /**
@@ -109,7 +161,7 @@ public class GameOfLife
      * @post    the world has been populated with a new grid containing the next generation
      * 
      */
-    public void createNextGeneration()
+    private void createNextGeneration()
     {
         /** You will need to read the documentation for the World, Grid, and Location classes
          *      in order to implement the Game of Life algorithm and leverage the GridWorld framework.
@@ -169,7 +221,6 @@ public class GameOfLife
             Rock rock = new Rock();
             grid.put(revivedCells[i], rock);
         }
-
     }
 
     /**

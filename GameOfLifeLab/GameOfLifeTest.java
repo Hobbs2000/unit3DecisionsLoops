@@ -1,4 +1,3 @@
-
 import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
@@ -109,13 +108,9 @@ public class GameOfLifeTest
          */
         
         GameOfLife game = new GameOfLife();
-
         final int ROWS = game.getNumRows();
         final int COLS = game.getNumCols();
-        
-        game.createNextGeneration();
-        game.createNextGeneration();
-        
+
         for(int row = 0; row < ROWS; row++)
         {
             for(int col = 0; col < COLS; col++)
@@ -144,4 +139,3 @@ public class GameOfLifeTest
         
     }
 }
-
