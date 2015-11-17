@@ -4,15 +4,10 @@ dependency1.to=GameOfLife
 dependency1.type=UsesDependency
 objectbench.height=100
 objectbench.width=957
-package.editor.height=400
+package.editor.height=393
 package.editor.width=859
-<<<<<<< HEAD
-package.editor.x=749
-package.editor.y=344
-=======
-package.editor.x=2
-package.editor.y=441
->>>>>>> origin/master
+package.editor.x=373
+package.editor.y=364
 package.numDependencies=1
 package.numTargets=2
 package.showExtends=true
@@ -24,13 +19,8 @@ readme.editor.x=461
 readme.editor.y=83
 target1.editor.height=877
 target1.editor.width=900
-<<<<<<< HEAD
-target1.editor.x=969
-target1.editor.y=83
-=======
 target1.editor.x=380
 target1.editor.y=58
->>>>>>> origin/master
 target1.height=50
 target1.name=GameOfLifeTest
 target1.naviview.expanded=true
@@ -41,17 +31,10 @@ target1.width=120
 target1.x=100
 target1.y=90
 target2.association=GameOfLifeTest
-<<<<<<< HEAD
-target2.editor.height=1047
-target2.editor.width=974
-target2.editor.x=-7
-target2.editor.y=0
-=======
-target2.editor.height=877
+target2.editor.height=917
 target2.editor.width=966
 target2.editor.x=741
 target2.editor.y=37
->>>>>>> origin/master
 target2.height=50
 target2.name=GameOfLife
 target2.naviview.expanded=true

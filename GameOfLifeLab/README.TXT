@@ -32,11 +32,11 @@ The universe of the Game of Life is an infinite two-dimensional orthogonal
     continue to be applied repeatedly to create further generations.
     
 *The grid will be 10x10 cells large
-    Alive cells are colored green
-    Dead cells are colored black
-    The default pattern a straight line of 5 living cells. There will be two other patterns available, a glider gun pattern and a randomly made pattern
+    Alive cells are of the rock actor type
+    Dead cells are left as empty spaces
+    The default pattern a straight line of 5 living cells
     The program will run until the window is closed
-    The interval between each generation is going to be ever tenth of a second
+    The interval between each generation is going to be ever quarter of a second
     When a cell hits the edge of the grid, nothing will happen
 
 
